@@ -1,0 +1,138 @@
+Design a stack class that supports the push, pop, top, and getMin operations.
+
+MinStack() initializes the stack object.
+void push(int val) pushes the element val onto the stack.
+void pop() removes the element on the top of the stack.
+int top() gets the top element of the stack.
+int getMin() retrieves the minimum element in the stack.
+Each function should run in
+O(1) time.
+
+Example 1:
+
+Input: ["MinStack", "push", 1, "push", 2, "push", 0, "getMin", "pop", "top", "getMin"]
+
+Output: [null,null,null,null,0,null,2,1]
+
+Explanation:
+MinStack minStack = new MinStack();
+minStack.push(1);
+minStack.push(2);
+minStack.push(0);
+minStack.getMin(); // return 0
+minStack.pop();
+minStack.top();    // return 2
+minStack.getMin(); // return 1
+Constraints:
+
+-2^31 <= val <= 2^31 - 1.
+pop, top and getMin will always be called on non-empty stacks.
+
+
+
+
+
+
+
+You are given an array of strings tokens that represents a valid arithmetic expression in Reverse Polish Notation.
+
+Return the integer that represents the evaluation of the expression.
+
+The operands may be integers or the results of other operations.
+The operators include '+', '-', '*', and '/'.
+Assume that division between integers always truncates toward zero.
+Example 1:
+
+Input: tokens = ["1","2","+","3","*","4","-"]
+
+Output: 5
+
+Explanation: ((1 + 2) * 3) - 4 = 5
+Constraints:
+
+1 <= tokens.length <= 1000.
+tokens[i] is "+", "-", "*", or "/", or a string representing an integer in the range [-100, 100].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+You are given an array of integers temperatures where temperatures[i] represents the daily temperatures on the ith day.
+
+Return an array result where result[i] is the number of days after the ith day before a warmer temperature appears on a
+future day. If there is no day in the future where a warmer temperature will appear for the ith day, set result[i] to 0 instead.
+
+Example 1:
+
+Input: temperatures = [30,38,30,36,35,40,28]
+
+Output: [1,4,1,2,1,0,0]
+Example 2:
+
+Input: temperatures = [22,21,20]
+
+Output: [0,0,0]
+Constraints:
+
+1 <= temperatures.length <= 1000.
+1 <= temperatures[i] <= 100
+
+
+
+
+
+
+
+
+
+
+
+
+There are n cars traveling to the same destination on a one-lane highway.
+
+You are given two arrays of integers position and speed, both of length n.
+
+position[i] is the position of the ith car (in miles)
+speed[i] is the speed of the ith car (in miles per hour)
+The destination is at position target miles.
+
+A car can not pass another car ahead of it. It can only catch up to another car and then drive at the same speed as the car ahead of it.
+
+A car fleet is a non-empty set of cars driving at the same position and same speed. A single car is also considered a car fleet.
+
+If a car catches up to a car fleet the moment the fleet reaches the destination, then the car is considered to be part of the fleet.
+
+Return the number of different car fleets that will arrive at the destination.
+
+Example 1:
+
+Input: target = 10, position = [1,4], speed = [3,2]
+
+Output: 1
+Explanation: The cars starting at 1 (speed 3) and 4 (speed 2) become a fleet, meeting each other at 10, the destination.
+
+Example 2:
+
+Input: target = 10, position = [4,1,0,7], speed = [2,2,1,1]
+
+Output: 3
+Explanation: The cars starting at 4 and 7 become a fleet at position 10. The cars starting at 1 and 0 never catch up to the car ahead of them. Thus, there are 3 car fleets that will arrive at the destination.
+
+Constraints:
+
+n == position.length == speed.length.
+1 <= n <= 1000
+0 < target <= 1000
+0 < speed[i] <= 100
+0 <= position[i] < target
+All the values of position are unique.
