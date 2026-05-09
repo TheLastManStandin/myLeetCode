@@ -1,10 +1,8 @@
 package main
 
-import (
-	"fmt"
-)
+import "math"
 
-type Stack struct {
+type MinStack struct {
 	topNode *Node
 }
 
@@ -14,19 +12,19 @@ type Node struct {
 	min  int
 }
 
-func MinStack() *Stack {
+func Constructor() MinStack {
 	headNode := &Node{
 		prev: nil,
 		val:  0,
-		min:  999999999999,
+		min:  int(math.Pow(2, 31)),
 	}
-	stack := &Stack{
+	stack := MinStack{
 		topNode: headNode,
 	}
 	return stack
 }
 
-func (this *Stack) push(val int) {
+func (this *MinStack) Push(val int) {
 	newTop := Node{
 		prev: this.topNode,
 		val:  val,
@@ -41,26 +39,14 @@ func (this *Stack) push(val int) {
 	this.topNode = &newTop
 }
 
-func (this *Stack) pop() {
+func (this *MinStack) Pop() {
 	this.topNode = this.topNode.prev
 }
 
-func (this *Stack) top() int {
+func (this *MinStack) Top() int {
 	return this.topNode.val
 }
 
-func (this *Stack) getMin() int {
+func (this *MinStack) GetMin() int {
 	return this.topNode.min
-}
-
-func main() {
-	stack := MinStack()
-
-	stack.push(1)
-	stack.push(2)
-	stack.push(0)
-	fmt.Println(stack.getMin())
-	stack.pop()
-	fmt.Println(stack.top())
-	fmt.Println(stack.getMin())
 }
