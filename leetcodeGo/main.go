@@ -3,11 +3,14 @@ package main
 import "fmt"
 
 func main() {
-	nameArray := [6]string{"D", "a", "n", "i", "i", "l"}
-	nameSlice := nameArray[:3]
-	nameSlice[len(nameSlice)-1] = "m"
-	nameSlice = append(nameSlice, "o")
-	fmt.Println(nameSlice) // [D a m]
-	fmt.Println(nameArray) // [D a m i i l]
-	fmt.Println(cap(nameSlice))
+	target := 10
+	carPos := 6
+	carSpeed := 3
+	//timeToRichTarget := (target - carPos) / carSpeed
+	//if (target-carPos)%carSpeed != 0 {
+	//	timeToRichTarget++
+	//}
+	timeToRichTarget := (target - carPos + carSpeed - 1) / carSpeed
+
+	fmt.Println(timeToRichTarget)
 }
