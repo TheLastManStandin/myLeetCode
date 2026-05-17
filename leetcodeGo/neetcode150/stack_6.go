@@ -1,57 +1,102 @@
 package main
 
-//type doubleStack [][2]int
-//
-//func (s *doubleStack) Push(v [2]int) {
-//	*s = append(*s, v)
-//}
-//
-//func (s *doubleStack) Pop() [2]int {
-//	lens := len(*s)
-//	res := (*s)[lens-1]
-//	*s = (*s)[:lens-1]
-//	return res
-//}
+import "slices"
 
 type Bar struct {
 	height int
 	index  int
 }
-type doubleLifo []Bar
 
-func (dl *doubleLifo) GetOut() Bar {
-	return (*dl)[0]
+type barStack []Bar
+
+func (bs *barStack) getOut() Bar {
+	return (*bs)[len(*bs)-1]
 }
 
-func (dl *doubleLifo) Pop() {
-	*dl = (*dl)[1:]
+func (bs *barStack) push(b Bar) {
+	*bs = append(*bs, b)
 }
 
-func (dl *doubleLifo) Push(x Bar) {
-	*dl = append(*dl, x)
+func (bs *barStack) pop() {
+	*bs = (*bs)[:len(*bs)-1]
 }
 
 func largestRectangleArea(heights []int) int {
-	dl := doubleLifo{}
-	ans := 0
+	bs := new(barStack)
 	squares := make([]int, len(heights))
 
+	// Проходимся слева направо
 	for i, h := range heights {
-		if len(dl) == 0 {
-			dl.Push(Bar{height: h, index: i})
+		if len(*bs) == 0 {
+			bs.push(Bar{height: h, index: i})
 		} else {
-			dlVal := dl.GetOut()
+			dlVal := bs.getOut()
 			if dlVal.height <= h {
-				dl.Push(Bar{height: h, index: i})
+				bs.push(Bar{height: h, index: i})
 			} else {
 				for dlVal.height > h {
-					dl.Pop()
+					bs.pop()
 					squares[dlVal.index] = (i - dlVal.index) * dlVal.height
-					dlVal = dl.GetOut()
+					if len(*bs) > 0 {
+						dlVal = bs.getOut()
+					} else {
+						dlVal.height = -1
+					}
 				}
+				bs.push(Bar{height: h, index: i})
 			}
 		}
 	}
 
-	return ans
+	dlVal := bs.getOut()
+	bsLen := len(*bs)
+	for i := 0; i < bsLen; i++ {
+		bs.pop()
+		squares[dlVal.index] += (len(heights) - dlVal.index) * dlVal.height
+		if len(*bs) > 0 {
+			dlVal = bs.getOut()
+		} else {
+			dlVal.height = -1
+		}
+	}
+
+	bs = new(barStack)
+
+	// Проходимся справа налево
+	for i := len(heights) - 1; i >= 0; i-- {
+		h := heights[i]
+		if len(*bs) == 0 {
+			bs.push(Bar{height: h, index: i})
+		} else {
+			dlVal = bs.getOut()
+			if dlVal.height <= h {
+				bs.push(Bar{height: h, index: i})
+			} else {
+				for dlVal.height > h {
+					bs.pop()
+					squares[dlVal.index] += (dlVal.index - i - 1) * dlVal.height
+					if len(*bs) > 0 {
+						dlVal = bs.getOut()
+					} else {
+						dlVal.height = -1
+					}
+				}
+				bs.push(Bar{height: h, index: i})
+			}
+		}
+	}
+
+	dlVal = bs.getOut()
+	bsLen = len(*bs)
+	for i := 0; i < bsLen; i++ {
+		bs.pop()
+		squares[dlVal.index] += dlVal.index * dlVal.height
+		if len(*bs) > 0 {
+			dlVal = bs.getOut()
+		} else {
+			dlVal.height = -1
+		}
+	}
+
+	return slices.Max(squares)
 }

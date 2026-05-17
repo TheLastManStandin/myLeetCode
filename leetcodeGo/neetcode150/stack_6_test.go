@@ -16,7 +16,28 @@ func Test_largestRectangleArea(t *testing.T) {
 			args: args{
 				heights: []int{3, 4, 5, 0},
 			},
-			want: 0,
+			want: 9,
+		},
+		{
+			name: "case 2",
+			args: args{
+				heights: []int{3, 5, 4, 6, 2},
+			},
+			want: 12,
+		},
+		{
+			name: "case 3",
+			args: args{
+				heights: []int{7, 1, 7, 2, 2, 4},
+			},
+			want: 8,
+		},
+		{
+			name: "case 4",
+			args: args{
+				heights: []int{2, 1, 2},
+			},
+			want: 3,
 		},
 	}
 	for _, tt := range tests {
