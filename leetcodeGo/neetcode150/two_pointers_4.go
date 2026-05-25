@@ -1,6 +1,20 @@
 package main
 
 func maxArea(heights []int) int {
-	// сначала сканируем слева и справа на то, что бы размер возрастал
+	left, right := 0, len(heights)-1
+	maxS := 0
 
+	for left < right {
+		s := min(heights[left], heights[right]) * (right - left)
+		maxS = max(maxS, s)
+		if heights[left] < heights[right] {
+			left++
+		} else if heights[left] > heights[right] {
+			right--
+		} else {
+			left++
+		}
+	}
+
+	return maxS
 }
