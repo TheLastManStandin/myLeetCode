@@ -11,9 +11,24 @@ func trap(height []int) int {
 		return ans
 	}
 
-	for left < right {
-		if len(stackLeft) == 0 {
-			stackLeft = append(stackLeft, height[left])
+	stackRight = append(stackRight, height[right])
+	right--
+	stackLeft = append(stackLeft, height[left])
+	left++
+
+	for left <= right {
+		if stackRight[0] < stackLeft[0] {
+			if height[right] > stackRight[0] {
+				stackRightLen := len(stackRight)
+				for i := 1; i <= stackRightLen-1; i++ {
+					ans += stackRight[0] - stackRight[i]
+				}
+				stackRight = make([]int, 0, len(height))
+				stackRight = append(stackRight, height[right])
+			} else {
+				stackRight = append(stackRight, height[right])
+			}
+			right--
 		} else {
 			if height[left] > stackLeft[0] {
 				stackLeftLen := len(stackLeft)
@@ -25,25 +40,8 @@ func trap(height []int) int {
 			} else {
 				stackLeft = append(stackLeft, height[left])
 			}
+			left++
 		}
-
-		if len(stackRight) == 0 {
-			stackRight = append(stackRight, height[right])
-		} else {
-			if height[right] > stackRight[0] {
-				stackRightLen := len(stackRight)
-				for i := 1; i <= stackRightLen-1; i++ {
-					ans += stackRight[0] - stackRight[i]
-				}
-				stackRight = make([]int, 0, len(height))
-				stackRight = append(stackRight, height[right])
-			} else {
-				stackRight = append(stackRight, height[right])
-			}
-		}
-
-		left++
-		right--
 	}
 
 	curLevel := min(stackRight[0], stackLeft[0])

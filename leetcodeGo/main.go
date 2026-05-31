@@ -1,16 +1,37 @@
 package main
 
-import "fmt"
-
 func main() {
-	target := 10
-	carPos := 6
-	carSpeed := 3
-	//timeToRichTarget := (target - carPos) / carSpeed
-	//if (target-carPos)%carSpeed != 0 {
-	//	timeToRichTarget++
-	//}
-	timeToRichTarget := (target - carPos + carSpeed - 1) / carSpeed
-
-	fmt.Println(timeToRichTarget)
+	target := []int{6, 4, 2, 0, 3, 2, 0, 3, 1, 4, 5, 3, 2, 7, 5, 3, 0, 1, 2, 1, 3, 4, 6, 8, 1, 3}
+	for i := 0; i < len(target); i++ {
+		println(target[i], i)
+	}
 }
+
+/*
+6 0
+4 1
+2 2
+0 3
+3 4
+2 5
+0 6
+3 7
+1 8
+4 9
+5 10
+3 11
+2 12
+7 13
+5 14
+3 15
+0 16
+1 17
+2 18
+1 19
+3 20
+4 21
+6 22
+8 23
+1 24
+3 25
+*/
