@@ -39,6 +39,13 @@ func Test_trap(t *testing.T) {
 			},
 			want: 83,
 		},
+		{
+			name: "case 5",
+			args: args{
+				height: []int{5, 3, 2, 1, 4},
+			},
+			want: 9,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
