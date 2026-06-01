@@ -18,7 +18,47 @@ func Test_search(t *testing.T) {
 				nums:   []int{-1, 0, 2, 4, 6, 8},
 				target: 4,
 			},
+			want: 3,
+		},
+		{
+			name: "case 3",
+			args: args{
+				nums:   []int{-1, 0, 2, 4, 6, 8},
+				target: 6,
+			},
 			want: 4,
+		},
+		{
+			name: "case 6",
+			args: args{
+				nums:   []int{-1, 0, 2, 4, 6, 8},
+				target: 3,
+			},
+			want: -1,
+		},
+		{
+			name: "case 2",
+			args: args{
+				nums:   []int{-1, 0, 3, 5, 9, 12},
+				target: 9,
+			},
+			want: 4,
+		},
+		{
+			name: "case 4",
+			args: args{
+				nums:   []int{0, 2},
+				target: 2,
+			},
+			want: 1,
+		},
+		{
+			name: "case 5",
+			args: args{
+				nums:   []int{0, 2, 5},
+				target: 2,
+			},
+			want: 1,
 		},
 	}
 	for _, tt := range tests {

@@ -1,22 +1,22 @@
 package main
 
 func search(nums []int, target int) int {
-	numsLen := len(nums)
+	numsLen := len(nums) - 1
 	index := numsLen / 2
-	prevIndex := -1
+	//prevIndex := -1
 
-	for index != prevIndex {
+	for numsLen > 0 {
 		if nums[index] == target {
-			return index + 1
+			return index
 		}
-		
-		prevIndex = index
+
+		//prevIndex = index
 		if nums[index] > target {
-			numsLen = index - 1
-			index = numsLen / 2
+			numsLen /= 2      // 1 2 3 4 -> nl = 0		1 2 3  -> nl = 1
+			index = index / 2 //   i-1   -> i = 0           i    -> i = 0
 		} else {
-			numsLen = numsLen - index
-			index = numsLen / 2
+			numsLen /= 2 // 1 2 3 4 -> nl =
+			index = index + numsLen/2 + 1
 		}
 
 	}
