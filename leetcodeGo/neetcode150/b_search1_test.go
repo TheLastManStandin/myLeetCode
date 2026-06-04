@@ -102,6 +102,14 @@ func Test_search(t *testing.T) {
 			},
 			want: 5,
 		},
+		{
+			name: "case 12",
+			args: args{
+				nums:   []int{5},
+				target: 5,
+			},
+			want: 0,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

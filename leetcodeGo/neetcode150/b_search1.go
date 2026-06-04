@@ -11,7 +11,7 @@ func search(nums []int, target int, startsFromIndex ...int) int {
 		return -1
 	} else if numsLen == 1 {
 		if nums[0] == target {
-			return startsFromIndex[0] + nums[0]
+			return startsFromIndex[0]
 		}
 		return -1
 	}
