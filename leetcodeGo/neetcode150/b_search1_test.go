@@ -60,6 +60,48 @@ func Test_search(t *testing.T) {
 			},
 			want: 1,
 		},
+		{
+			name: "case 7",
+			args: args{
+				nums:   []int{0, 2, 5, 7},
+				target: 2,
+			},
+			want: 1,
+		},
+		{
+			name: "case 8",
+			args: args{
+				nums:   []int{0, 2, 5, 7, 9, 10, 11},
+				target: 2,
+			},
+			want: 1,
+		},
+		{
+			name: "case 9",
+			args: args{
+				nums:   []int{0, 2, 5, 7, 9, 10, 11},
+				target: 10,
+			},
+			want: 5,
+		},
+
+		{
+			name: "case 10",
+			args: args{
+				nums:   []int{0, 2, 5, 7, 9, 10, 11, 12},
+				target: 10,
+			},
+			want: 5,
+		},
+
+		{
+			name: "case 11",
+			args: args{
+				nums:   []int{0, 2, 5, 7, 9, 10, 11, 12, 13, 15},
+				target: 10,
+			},
+			want: 5,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
