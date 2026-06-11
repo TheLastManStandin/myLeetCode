@@ -1,4 +1,4 @@
-package main
+package two_pointers
 
 //
 //func trap(height []int) int {

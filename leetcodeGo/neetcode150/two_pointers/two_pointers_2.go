@@ -1,4 +1,4 @@
-package main
+package two_pointers
 
 func twoSum(numbers []int, target int) []int {
 	indexOne := 0

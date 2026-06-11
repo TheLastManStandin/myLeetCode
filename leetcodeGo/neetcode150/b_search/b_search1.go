@@ -1,4 +1,4 @@
-package main
+package b_search
 
 func search(nums []int, target int, startsFromIndex ...int) int {
 	if startsFromIndex == nil {
