@@ -1,4 +1,4 @@
-package main
+package stack
 
 func dailyTemperatures(temperatures []int) []int {
 	stack := Constructor()

@@ -1,4 +1,4 @@
-package main
+package stack
 
 func isValid(s string) bool {
 	stack := make([]byte, 0, len(s)/2)
