@@ -1,57 +1,51 @@
 package b_search
 
-import (
-	"fmt"
-)
-
-type timeStamp struct {
-	time int
-	val  string
-}
-type TimeMap struct {
-	hashmap map[string][]timeStamp
-}
-
-func Constructor() TimeMap {
-	return TimeMap{
-		hashmap: make(map[string][]timeStamp),
-	}
-}
-
-func (this *TimeMap) Set(key string, value string, timestamp int) {
-	this.hashmap[key] = append(this.hashmap[key], timeStamp{timestamp, value})
-}
-
-func (this *TimeMap) Get(key string, timestamp int) string {
-	timeMap, ok := this.hashmap[key]
-	if !ok {
-		return ""
-	}
-	return bSearchVal(timeMap, timestamp)
-}
-
-func bSearchVal(timeMap []timeStamp, timestamp int) string {
+func searchShift(nums []int) int {
 	left := 0
-	right := len(timeMap)
-	res := ""
+	right := len(nums)
+	lastMid := left
 
 	for left < right {
 		mid := left + (right-left)/2
-		if timeMap[mid].time > timestamp {
+		if nums[mid] > nums[lastMid] {
+			left = mid + 1
+		} else if nums[mid] <= nums[lastMid] {
+			lastMid = mid
+			right = mid
+		}
+	}
+	return lastMid
+}
+
+func search(nums []int, target int) int {
+	shift := searchShift(nums)
+	newNums := make([]int, 0, len(nums))
+	newNums = append(newNums, append(nums[shift:], nums[:shift]...)...)
+
+	left := 0
+	right := len(nums)
+	ans := -1
+
+	for left < right {
+		mid := left + (right-left)/2
+		midVal := newNums[mid]
+
+		if midVal == target {
+			ans = mid
+			break
+		} else if midVal > target {
 			right = mid
 		} else {
-			res = timeMap[mid].val
 			left = mid + 1
 		}
 	}
 
-	return res
-}
-
-func main() {
-	tm := Constructor()
-	tm.Set("k1", "v1", 10)
-	tm.Set("k1", "v2", 20)
-	tm.Set("k1", "v3", 30)
-	fmt.Println(tm.Get("k1", 15))
+	if ans != -1 {
+		negativeShift := len(nums) - shift
+		if ans < negativeShift {
+			return ans + shift
+		}
+		return ans - negativeShift
+	}
+	return ans
 }

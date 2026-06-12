@@ -2,135 +2,62 @@ package b_search
 
 import "testing"
 
-func Test_bSearchVal(t *testing.T) {
+func Test_search(t *testing.T) {
 	type args struct {
-		timeMap   []timeStamp
-		timestamp int
+		nums   []int
+		target int
 	}
 	tests := []struct {
 		name string
 		args args
-		want string
+		want int
 	}{
 		{
 			name: "case 1",
 			args: args{
-				timeMap: []timeStamp{
-					{5, "5"},
-					{6, "6"},
-					{7, "7"},
-					{8, "8"},
-					{9, "9"},
-				},
-				timestamp: 7,
+				nums:   []int{3, 4, 5, 6, 1, 2},
+				target: 1,
 			},
-			want: "7",
+			want: 4,
 		},
 		{
 			name: "case 2",
 			args: args{
-				timeMap: []timeStamp{
-					{5, "5"},
-					{6, "6"},
-					{7, "7"},
-					{8, "8"},
-					{9, "9"},
-				},
-				timestamp: 8,
+				nums:   []int{3, 5, 6, 0, 1, 2},
+				target: 4,
 			},
-			want: "8",
+			want: -1,
 		},
 		{
 			name: "case 3",
 			args: args{
-				timeMap: []timeStamp{
-					{5, "5"},
-					{6, "6"},
-					{7, "7"},
-					{8, "8"},
-					{9, "9"},
-				},
-				timestamp: 9,
+				nums:   []int{2, 3, 4, 5, 6, 1},
+				target: 1,
 			},
-			want: "9",
+			want: 5,
 		},
 		{
 			name: "case 4",
 			args: args{
-				timeMap: []timeStamp{
-					{5, "5"},
-					{6, "6"},
-					{7, "7"},
-					{8, "8"},
-					{9, "9"},
-				},
-				timestamp: 5,
+				nums:   []int{2},
+				target: 2,
 			},
-			want: "5",
+			want: 0,
 		},
 		{
 			name: "case 5",
 			args: args{
-				timeMap: []timeStamp{
-					{5, "5"},
-					{6, "6"},
-					{7, "7"},
-					{8, "8"},
-					{9, "9"},
-					{10, "10"},
-				},
-				timestamp: 7,
+				nums:   []int{2, 3, 4, 5, 6, 1},
+				target: 2,
 			},
-			want: "7",
-		},
-		{
-			name: "case 6",
-			args: args{
-				timeMap: []timeStamp{
-					{5, "5"},
-					{6, "6"},
-					{7, "7"},
-					{8, "8"},
-					{9, "9"},
-					{10, "10"},
-				},
-				timestamp: 8,
-			},
-			want: "8",
-		},
-		{
-			name: "case 7",
-			args: args{
-				timeMap: []timeStamp{
-					{10, "5"},
-					{20, "6"},
-					{30, "7"},
-				},
-				timestamp: 15,
-			},
-			want: "5",
+			want: 0,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := bSearchVal(tt.args.timeMap, tt.args.timestamp); got != tt.want {
-				t.Errorf("bSearchVal() = %v, want %v", got, tt.want)
+			if got := search(tt.args.nums, tt.args.target); got != tt.want {
+				t.Errorf("search() = %v, want %v", got, tt.want)
 			}
-		})
-	}
-}
-
-func Test_main(t *testing.T) {
-	tests := []struct {
-		name string
-	}{
-		{
-			name: "case 1",
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			main()
 		})
 	}
 }
