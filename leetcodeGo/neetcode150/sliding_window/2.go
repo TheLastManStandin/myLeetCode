@@ -41,7 +41,7 @@ func lengthOfLongestSubstring(s string) int {
 			l = max(idx+1, l)
 		}
 		mp[s[r]] = r
-		if r-l+1 > res {
+		if (r-l)+1 > res {
 			res = r - l + 1
 		}
 	}
