@@ -3,9 +3,6 @@ package main
 import "fmt"
 
 func main() {
-	if true {
-		defer fmt.Println("world")
-	}
-
-	fmt.Println("hello ")
+	a := []int{1, 2, 3, 4, 5, 6, 7}
+	fmt.Println(a[1:3])
 }
