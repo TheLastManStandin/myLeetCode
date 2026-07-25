@@ -1,37 +1,11 @@
 package main
 
-func main() {
-	target := []int{6, 4, 2, 0, 3, 2, 0, 3, 1, 4, 5, 3, 2, 7, 5, 3, 0, 1, 2, 1, 3, 4, 6, 8, 1, 3}
-	for i := 0; i < len(target); i++ {
-		println(target[i], i)
-	}
-}
+import "fmt"
 
-/*
-6 0
-4 1
-2 2
-0 3
-3 4
-2 5
-0 6
-3 7
-1 8
-4 9
-5 10
-3 11
-2 12
-7 13
-5 14
-3 15
-0 16
-1 17
-2 18
-1 19
-3 20
-4 21
-6 22
-8 23
-1 24
-3 25
-*/
+func main() {
+	if true {
+		defer fmt.Println("world")
+	}
+
+	fmt.Println("hello ")
+}
