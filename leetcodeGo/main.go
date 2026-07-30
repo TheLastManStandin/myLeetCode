@@ -1,19 +1,41 @@
 package main
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+	"time"
+)
+
+// Имитация долгого запроса к базе данных или API
+func fetchData() string {
+	time.Sleep(2 * time.Second) // Долгая операция
+	return "data"
+}
+
+func handleRequest() string {
+	ch := make(chan string)
+
+	go func() {
+		data := fetchData()
+		ch <- data // Горлышко инцидента
+	}()
+
+	// Ограничиваем время выполнения запроса одной секундой
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancel()
+
+	select {
+	case result := <-ch:
+		return result
+	case <-ctx.Done():
+		return "timeout"
+	}
+}
 
 func main() {
-	var myPort *int // myPort равен nil
-
-	SetDefaultPort(myPort)
-
-	// Что будет в myPort здесь?
-	fmt.Println(myPort) // Выведет <nil>! Новое значение потерялось.
-}
-func SetDefaultPort(p *int) {
-	if p == nil {
-		p = new(int) // УБРАЛИ
-		*p = 8080    // 💥 ТУТ БУДЕТ ПАНИКА!
+	// Имитируем поток запросов в веб-сервере
+	for i := 0; i < 1000; i++ {
+		go handleRequest()
 	}
-	fmt.Println("Port:", *p)
+	fmt.Println("Обработка завершена")
 }
