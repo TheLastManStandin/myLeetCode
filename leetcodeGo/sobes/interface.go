@@ -28,15 +28,15 @@ func main() {
 	fmt.Printf("s1: %v, ok1: %v\n", s1, ok1)
 
 	// Шаг 2
-	s2, ok2 := r.(Baby)
-	fmt.Printf("s2: %v, ok2: %v\n", s2, ok2)
+	//s2, ok2 := r.(Baby)
+	//fmt.Printf("s2: %v, ok2: %v\n", s2, ok2)
 
 	// Шаг 3
-	var i interface{} = r
-	s3, ok3 := i.(Swimmer)
-	fmt.Printf("s3: %v, ok3: %v\n", s3, ok3)
+	//var i interface{} = r
+	//s3, ok3 := i.(Swimmer)
+	//fmt.Printf("s3: %v, ok3: %v\n", s3, ok3)
 
 	// Шаг 4
-	s4, ok4 := i.(Baby)
-	fmt.Printf("s4: %v, ok4: %v\n", s4, ok4)
+	//s4, ok4 := i.(Baby)
+	//fmt.Printf("s4: %v, ok4: %v\n", s4, ok4)
 }
