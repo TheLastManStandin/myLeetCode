@@ -2,21 +2,51 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
+	"sync"
 )
 
+func worker(in <-chan int, out chan<- int, workerID int) {
+	for x := range in {
+		fmt.Printf("worker %d, job %d\n", workerID, x)
+		out <- x * x
+	}
+}
+
 func main() {
-	a := []int{}
-	a = append(a, []int{1, 2, 3, 4, 5}...) // len = 5, cap = 6
+	const workersNum = 3
+	data := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	results := make([]int, 0, len(data))
 
-	fmt.Println(cap(a)) // 6
+	// producer
+	in := make(chan int)
 
-	b := append(a, 6) // b - based on a; b = {1,2,3,4,5,6} len = 6, cap = 6; a = {1,2,3,4,5}6
-	c := append(b, 7) // c - new massive; c = {1,2,3,4,5,6,7}; len = 7, cap = 12
+	go func() {
+		defer close(in)
 
-	c[1] = 0 // a = {1,2,3,4,5}6; b = {1,2,3,4,5,6}; c = {1,0,3,4,5,6,7}
-	fmt.Println(a)
-	fmt.Println(b)
-	fmt.Println(c)
-	rand.Int63n()
+		for _, x := range data {
+			in <- x
+		}
+	}()
+
+	// workers
+	var wg sync.WaitGroup
+	out := make(chan int)
+
+	for w := 1; w <= workersNum; w++ {
+		wg.Go(func() {
+			worker(in, out, w)
+		})
+	}
+
+	go func() {
+		wg.Wait()
+		close(out)
+	}()
+
+	// consumer
+	for x := range out {
+		results = append(results, x)
+	}
+
+	fmt.Println("Results:", results)
 }
